@@ -1,2 +1,2 @@
-# linfini-s-blog
+# linfini-blog
 我的个人博客,记录一些技术相关的内容,供自己查漏补缺
