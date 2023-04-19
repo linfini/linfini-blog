@@ -1,0 +1,69 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    container_name: elasticsearch_server
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - discovery.zen.minimum_master_nodes=1
+      - ES_JAVA_OPTS=-Xms3g -Xmx3g
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300 
+    networks:
+      elk_net:     # 指定使用的网络
+        aliases:
+          - elasticsearch     # 该容器的别名，在 elk_net 网络中的其他容器可以通过别名 elasticsearch 来访问到该容器
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.0
+    container_name: kibana_server
+    ports:
+      - "5601:5601"
+    restart: always
+    networks:
+      elk_net:
+        aliases:
+          - kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - SERVER_NAME=kibana
+    # 如需具体配置，可以创建./config/kibana.yml，并映射
+    # volumes:
+    #   - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.15.0
+    container_name: logstash_server
+    restart: always
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+    volumes:
+      - ./config/logstash.conf:/etc/logstash/conf.d/logstash.conf
+    networks:
+      elk_net:
+        aliases:
+          - logstash
+    depends_on:
+      - elasticsearch
+    entrypoint:
+      - logstash
+      - -f
+      - /etc/logstash/conf.d/logstash.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+    ports:
+      - 4560:4560
+
+networks:
+  elk_net:
+    external:
+      name: elk_net
