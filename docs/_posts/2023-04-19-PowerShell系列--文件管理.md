@@ -1,5 +1,9 @@
-### PowerShell系列--文件文件管理
-
+---
+layout: post
+title:  "PowerShell系列--文件管理"
+date:   2023-04-19 16:30:18 +0800
+categories: jekyll update
+---
 1. 新建文件
 
    New-Item 名称
