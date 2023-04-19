@@ -21,7 +21,8 @@
 title: 翟杰的博客
 email: argenzaki@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  使用Jekyll搭建的个人博客.项目github地址 https://github.com/linfini/linfini-blog.git
+  个人博客,刚刚起步后续会慢慢丰富内容
+  项目github地址 https://github.com/linfini/linfini-blog.git
 # baseurl: "" # the subpath of your site, e.g. /blog
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
