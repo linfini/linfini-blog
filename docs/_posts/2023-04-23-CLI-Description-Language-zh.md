@@ -6,14 +6,13 @@ date:   2023-04-23 16:48:18
 
 
 
-# Command-line interface description language
+# Commend-Line接口描述语言
 
-`docopt` helps you:
+`docopt` 可以帮你:
 
-- define the interface for your command-line app, and
-- automatically generate a parser for it.
+- 为命令行应用定义接口并且自动为其生成解析器
 
-`docopt` is based on conventions that have been used for decades in help messages and man pages for describing a program's interface. An interface description in `docopt` *is* such a help message, but formalized. Here is an example:
+`docopt` 基于数十年程序接口在帮助消息和man pages中形成的使用惯例.`docopt`中的接口描述如以下帮助消息,它比较固定.如:
 
 ```
 Naval Fate.
@@ -35,24 +34,24 @@ Options:
 
 ```
 
-The example describes the interface of executable `naval_fate`, which can be invoked with different combinations of *commands* (`ship`, `new`, `move`, etc.), *options* (`-h`, `--help`, `--speed=<kn>`, etc.) and positional arguments (`<name>`, `<x>`, `<y>`).
+该例描述可执行接口`naval_fate`,它可以执行不同组合的*命令*(`ship`,`new`,`move`,等),*选项*(`-h`, `--help`, `--speed=<kn>`, 等.),和位置参数(`<name>`, `<x>`, `<y>`).  
 
-The example uses brackets "`[ ]`", parens "`( )`", pipes "`|`" and ellipsis "`...`" to describe *optional*, *required*, *mutually exclusive*, and *repeating* elements. Together, these elements form valid *usage patterns*, each starting with program's name `naval_fate`.
+该例使用中括号"`[ ]`",括号"`( )`",  管道符"`|`" and 省略符号 "`...`" 来表达可选,必须,互斥,和重复元素.总之,这些元素形成了有效的使用方式,每次执行都以程序名`nava_fate`开始.
 
-Below the usage patterns, there is a list of options with descriptions. They describe whether an option has short/long forms (`-h`, `--help`), whether an option has an argument (`--speed=<kn>`), and whether that argument has a default value (`[default: 10]`).
+在Usage下方,有一组带描述的可选参数.描述了选项是否有长/短形式(`-h`, `--help`),选项是否有参数(`--speed=<kn>`),和选项是否有默认值(`[default: 10]`).
 
-A `docopt` implementation will extract all that information and generate a command-line arguments parser, with the text of the interface description as the help message shown when the program is invoked with the `-h` or `--help` options.
+`docopt`实现会提取信息并且生成命令行参数解析器,当程序调用`-h` or `--help`选项时,接口描述文本会作为帮助显示出来.
 
-## Usage patterns
+## 使用方式
 
-Text occuring between keyword `usage:` (case-*in*sensitive) and a *visibly* empty line is interpreted as list of usage patterns. The first word after `usage:` is interpreted as the program's name. Here is a minimal example for program that takes no command-line arguments:
+关键字`usage:`(不区分大小写)和明显空行之间的是使用方式.`usage`后的第一个词是程序的名称.这是一个无命令行参数最小实例程序:
 
 ```
 Usage: my_program
 
 ```
 
-Program can have several patterns listed with various elements used to describe the pattern:
+程序有几种不同的模式,使用不同的参数可以描述这种模式:
 
 ```
 Usage:
@@ -64,11 +63,13 @@ Usage:
 
 ```
 
-Each of the elements and constructs is described below. We will use the word "*word*" to describe a sequence of characters delimited by either whitespace, one of "`[]()|`" characters, or "`...`".
+下面描述每个元素和结构.我们将使用 "word"来描述被 空格,"`[]()|`"其中之一,或者 "`...`"等字符分割的一串字符.
 
-### <argument> ARGUMENT
+### <argument> 参数
 
 Words starting with "`<`", ending with "`>`" and upper-case words are interpreted as positional arguments.
+
+`<`开头,`>`并且小写的单词被称作位置参数.
 
 ```
 Usage: my_program <host> <port>
@@ -78,6 +79,8 @@ Usage: my_program <host> <port>
 ### -o --option
 
 Words starting with one or two dashes (with exception of "`-`", "`--`" by themselves) are interpreted as short (one-letter) or long options, respectively.
+
+一个'-'或两个'--'开始的单词(除过'-','--'本身)都分别被解释为短/长选项.
 
 - Short options can be "stacked" meaning that `-abc` is equivalent to `-a -b -c`.
 - Long options can have arguments specified after space or equal "`=`" sign:
