@@ -76,5 +76,13 @@
 
 ### 2.对象的内存布局
 
+对象在对内存布局：对象头，实例数据，和对齐填充。
 
+对象头包含两类信息，线程运行时数据，哈希码，GC分代年龄，锁状态标识，线程持有锁，偏向线程ID等。Java类型指针，指向方法区对象类型数据。
+
+![img](https://img-blog.csdn.net/20180829135125817?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MDA1OTQz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)![img](https://img-blog.csdn.net/20150710172441054?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+​                                          
+
+​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
