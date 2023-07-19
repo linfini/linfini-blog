@@ -30,7 +30,16 @@
 
 存放编译期间生成的各种字面量与符号引用。
 
-字面量：即用双引号创建的字符串常量，final变量
+1)**字面量**：字面量比较接近于Java语言层面的常量概念，如文本字符串、被声明为final的常量值等。
+
+2)**符号引用:** 则属于编译原理方面的概念
+
+·被模块导出或者开放的包（Package）
+·类和接口的全限定名（Fully Qualified Name）
+·字段的名称和描述符（Descriptor）
+·方法的名称和描述符
+·方法句柄和方法类型（Method Handle、Method Type、Invoke Dynamic）
+·动态调用点和动态常量（Dynamically-Computed Call Site、Dynamically-Computed Constant）
 
 ## 虚拟机对象
 
@@ -79,6 +88,12 @@
 对象在对内存布局：对象头，实例数据，和对齐填充。
 
 对象头包含两类信息，线程运行时数据，哈希码，GC分代年龄，锁状态标识，线程持有锁，偏向线程ID等。Java类型指针，指向方法区对象类型数据。
+
+对象访问方式是由虚拟机实现的,主流有句柄和直接指针两种:
+
+**句柄访问**:而句柄中包含了对象实例数据与类型数据各自具体的地址信息
+
+**直接指针访问:** 引用reference中存储的直接就是对象地址,指向实例数据
 
 ![img](https://img-blog.csdn.net/20180829135125817?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MDA1OTQz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)![img](https://img-blog.csdn.net/20150710172441054?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
